@@ -1,11 +1,14 @@
 const postDetailsDiv = document.getElementById('postDetailsDiv');
+
 const POST_ID = localStorage.getItem('postID');
+const postsUrl = new URL(`https://jsonplaceholder.typicode.com/posts/`);
+postsUrl.pathname += POST_ID;
 
 // fetch post and display all it`s properties
 async function buildPostDetails(){
     let post;
     try { // Handle potential errors
-        post = await fetch(`https://jsonplaceholder.typicode.com/posts/${POST_ID}`)
+        post = await fetch(postsUrl)
             .then((res) => {
                 if(!res.ok){
                     throw new Error(`Response error! Status: ${res.status}`);
@@ -32,7 +35,8 @@ const commentsDiv = document.getElementById('commentsDiv');
 async function displayComments(){
     let comments;
     try { // Handle potential errors
-        comments = await fetch(`https://jsonplaceholder.typicode.com/posts/${POST_ID}/comments`)
+        const commentsUrl = new URL(postsUrl + `/comments`);
+        comments = await fetch(commentsUrl)
             .then((res) => {
                 if(!res.ok){
                     throw new Error(`Response error! Status: ${res.status}`);

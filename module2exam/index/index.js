@@ -1,10 +1,11 @@
 const wrapperDiv = document.getElementById('usersWrap');
+const usersUrl = new URL('https://jsonplaceholder.typicode.com/users');
 
 // build userWrap block with all users
 async function buildUsersDiv() {
     let users;
     try { // Handle potential errors
-        users = await fetch('https://jsonplaceholder.typicode.com/users')
+        users = await fetch(usersUrl)
             .then((res) => {
                 if(!res.ok){
                     throw new Error(`Response error! Status: ${res.status}`);
@@ -32,7 +33,7 @@ async function buildUsersDiv() {
 
         const userDetailsBtn = document.createElement('a');
         userDetailsBtn.classList.add('userDetailsBtn');
-        userDetailsBtn.href = 'user-details.html';
+        userDetailsBtn.href = '../user-details/user-details.html';
         userDetailsBtn.innerText = `USER${user.id}-DETAILS`;
         userDetailsBtn.dataset.userId = user.id; // add userID for event handling
 

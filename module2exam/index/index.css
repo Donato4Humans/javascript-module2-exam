@@ -1,0 +1,30 @@
+*{
+    margin: 0;
+}
+main{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: grey;
+}
+.userDiv{
+    border: 1px solid;
+    height: 175px;
+    width: 350px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+    background: #7c37b1;
+    font-size: 26px;
+}
+.userDetailsBtn{
+    text-decoration: none;
+    color: deeppink;
+    background: grey;
+    border-radius: 15px;
+    padding: 10px;
+}

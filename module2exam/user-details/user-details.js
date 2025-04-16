@@ -1,11 +1,14 @@
 const userDiv = document.getElementById('userDetails');
+
 const USER_ID = +localStorage.getItem('userID');
+const userIdUrl = new URL('https://jsonplaceholder.typicode.com/users/');
+userIdUrl.pathname += USER_ID;
 
 // fetch current user and display all properties
 async function displayUserDetails(){
     let user;
     try { // Handle potential errors
-        user = await fetch(`https://jsonplaceholder.typicode.com/users/${USER_ID}`)
+        user = await fetch(userIdUrl)
             .then((res) => {
                 if(!res.ok){
                     throw new Error(`Response error! Status: ${res.status}`);
@@ -50,7 +53,9 @@ const POSTS_PER_ROW = 5;
 async function addPostsButtons(){
     let posts;
     try { // Handle potential errors
-        posts = await fetch(`https://jsonplaceholder.typicode.com/users/${USER_ID}/posts`)
+        const postsUrl = new URL(userIdUrl);
+        postsUrl.pathname += `/posts`;
+        posts = await fetch(postsUrl)
             .then((res) => {
                 if(!res.ok){
                     throw new Error(`Response error! Status: ${res.status}`);
@@ -80,7 +85,7 @@ async function addPostsButtons(){
 
             const postDetailsBtn = document.createElement('a');
             postDetailsBtn.innerText = `post-details${index + 1}`;
-            postDetailsBtn.href = 'post-details.html';
+            postDetailsBtn.href = '../post-details/post-details.html';
             postDetailsBtn.classList.add('postDetailsBtn');
             postDetailsBtn.dataset.postId = post.id;
 
